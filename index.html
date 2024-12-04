@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Dive into Network Architecture - Drawing and Equations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            font-size: 150%;
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        h1, h2, h3, h4 {
+            color: #333;
+            margin-top: 20px;
+        }
+        p, li {
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .image-placeholder, .interactive-placeholder, .continue-button, .vocab-section, .why-it-matters, .test-your-knowledge, .faq-section, .stop-and-think {
+            text-align: left;
+        }
+        .image-placeholder img, .interactive-placeholder img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .vocab-section, .why-it-matters, .test-your-knowledge, .faq-section, .stop-and-think {
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .vocab-section {
+            background-color: #f0f8ff;
+        }
+        .vocab-section h3 {
+            color: #1e90ff;
+            font-size: 0.75em;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        .vocab-section h4 {
+            color: #000;
+            font-size: 0.9em;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        .vocab-term {
+            font-weight: bold;
+            color: #1e90ff;
+        }
+        .why-it-matters {
+            background-color: #ffe6f0;
+        }
+        .why-it-matters h3 {
+            color: #d81b60;
+            font-size: 0.75em;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        .stop-and-think {
+            background-color: #e6e6ff;
+        }
+        .stop-and-think h3 {
+            color: #4b0082;
+            font-size: 0.75em;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        .continue-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 15px;
+            color: #ffffff;
+            background-color: #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .reveal-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 15px;
+            color: #ffffff;
+            background-color: #4b0082;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .test-your-knowledge {
+            background-color: #e6ffe6;
+        }
+        .test-your-knowledge h3 {
+            color: #28a745;
+            font-size: 0.75em;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        .test-your-knowledge h4 {
+            color: #000;
+            font-size: 0.9em;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        .test-your-knowledge p {
+            margin-bottom: 15px;
+        }
+        .check-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 15px;
+            color: #ffffff;
+            background-color: #28a745;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+        }
+        .faq-section {
+            background-color: #fffbea;
+        }
+        .faq-section h3 {
+            color: #ffcc00;
+            font-size: 0.75em;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        .faq-section h4 {
+            color: #000;
+            font-size: 0.9em;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        #networkCanvas {
+            border: 1px solid #000;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <section id="section1">
+        
+        <div class="image-placeholder">
+            <img src="/placeholder.svg?height=300&width=600" alt="Image of a person sketching a neural network architecture on a blueprint, with mathematical equations and symbols surrounding them.">
+        </div>
+        <h1>Deep Dive into Network Architecture - Drawing and Equations</h1>
+        <h3>Blueprint to Reality: Drawing and Defining Your Network</h3>
+        <p>You've learned the fundamental building blocks of neural networks. Now, it's time to put your knowledge to the test! Like an architect designing a building, you'll design your own neural network, complete with multiple layers, connections, and even the mathematical equations that describe its behavior. Get ready to become a neural network architect!</p>
+        <div class="continue-button" onclick="showNextSection(2)">Continue</div>
+    </section>
+
+    <section id="section2">
+        <p>Your challenge: Design a feedforward neural network with three hidden layers. Don't worry; we'll guide you through the process. First, grab your digital pen and use the interactive canvas below to sketch your network. Remember the key components:</p>
+        <ul>
+            <li><strong>Input Layer:</strong> How many inputs will your network receive?</li>
+            <li><strong>Hidden Layers:</strong> You need three! How many nodes will each hidden layer have?</li>
+            <li><strong>Output Layer:</strong> How many outputs will your network produce?</li>
+            <li><strong>Connections:</strong> Remember, in a fully connected layer, each node connects to every node in the next layer. Draw these connections.</li>
+            <li><strong>Weights and Biases:</strong> Don't forget to label each connection with a weight (w) and each node with a bias (b).</li>
+        </ul>
+        <div class="continue-button" onclick="showNextSection(3)">Continue</div>
+    </section>
+
+    <section id="section3">
+        <h3>Interactive Network Canvas</h3>
+        <p>Draw a feedforward neural network with 3 hidden layers, labeling weights and biases.</p>
+        <canvas id="networkCanvas" width="600" height="400"></canvas>
+        <button onclick="checkNetwork()">Check Network</button>
+        <p id="networkFeedback"></p>
+        <div class="continue-button" onclick="showNextSection(4)">Continue</div>
+    </section>
+
+    <section id="section4">
+        <p>Great job designing your network! Now, let's bring it to life with mathematics.</p>
+        <div class="continue-button" onclick="showNextSection(5)">Continue</div>
+    </section>
+
+    <section id="section5">
+        <h2>The Mathematical Blueprint: Equations of a Neural Network</h2>
+        <p>Just like an architect uses blueprints to translate a vision into a physical building, we'll use mathematical equations to describe our neural network. Don't worry; it's not as daunting as it sounds! We'll break it down step by step.</p>
+        <div class="continue-button" onclick="showNextSection(6)">Continue</div>
+    </section>
+
+    <section id="section6">
+        <p>Let's start with a single perceptron in your network. Remember its equation?</p>
+        <p>\[ a = \varphi(\sum(w_i * x_i) + b) \]</p>
+        <p>where:</p>
+        <ul>
+            <li><strong>a</strong> is the neuron's output</li>
+            <li><strong>φ</strong> is the activation function</li>
+            <li><strong>w<sub>i</sub></strong> are the weights</li>
+            <li><strong>x<sub>i</sub></strong> are the inputs</li>
+            <li><strong>b</strong> is the bias</li>
+        </ul>
+        <div class="continue-button" onclick="showNextSection(7)">Continue</div>
+    </section>
+
+    <section id="section7">
+        <p>Now, in a multi-layer network, the output of one layer becomes the input for the next. So, for each layer, we'll need to calculate the weighted sum and apply the activation function for each node. Let's use a simple example.</p>
+        <div class="continue-button" onclick="showNextSection(8)">Continue</div>
+    </section>
+        <section id="section8">
+        <p>You'll need to write similar equations for each node in each hidden layer and the output layer. Notice how the output of one layer becomes the input for the next, creating a chain of calculations. That's the essence of a feedforward network!</p>
+        <div class="continue-button" onclick="showNextSection(9)">Continue</div>
+    </section>
+    <section id="section9">
+        <p>Assume your first hidden layer has 4 nodes, and your input layer has 3 nodes. For each node in the hidden layer, you'll have an equation like this:</p>
+        <p>\[ h_1 = \phi(w_{11}x_1 + w_{12}x_2 + w_{13}x_3 + b_1) \]</p>
+        <p>Where:</p>
+        <ul>
+            <li>h<sub>1</sub> is the output of the first node in the hidden layer.</li>
+            <li>w<sub>11</sub>, w<sub>12</sub>, w<sub>13</sub> are the weights connecting the input layer to the first hidden node.</li>
+            <li>x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub> are the inputs from the input layer</li>
+            <li>b<sub>1</sub> is the bias of the first hidden node.</li>
+        </ul>
+          <div class="image-placeholder">
+            <img src="/placeholder.svg?height=300&width=600" alt="Image of a neural network with equations written alongside each layer and node, highlighting the mathematical representation of the network's architecture.">
+        </div>
+        <div class="continue-button" onclick="showNextSection(10)">Continue</div>
+    </section>
+
+    <section id="section10">
+        <p>You'll need to write similar equations for each node in each hidden layer and the output layer. Notice how the output of one layer becomes the input for the next, creating a chain of calculations. That's the essence of a feedforward network!</p>
+        <div class="continue-button" onclick="showNextSection(11)">Continue</div>
+    </section>
+    
+    <section id="section11">
+        <p>How does this calculation look like?</p>
+        <div class="continue-button" onclick="showNextSection(12)">Continue</div>
+    </section>
+
+    <section id="section12">
+        <div class="stop-and-think">
+            <h3>Stop and Think</h3>
+            <h4>Looking at the equation for h<sub>1</sub>, can you see how changing a single weight (e.g., w<sub>11</sub>) would affect the output of the network?</h4>
+            <button class="reveal-button" onclick="revealAnswer('stop-and-think-1')">Reveal</button>
+            <p id="stop-and-think-1" style="display: none;">Changing w<sub>11</sub> would directly affect h<sub>1</sub>, which then becomes an input for the next layer, influencing all subsequent calculations. Even small weight changes can have a ripple effect throughout the network!</p>
+        </div>
+        <div class="continue-button" onclick="showNextSection(13)">Continue</div>
+    </section>
+
+    <section id="section13">
+        <h2>Review and Reflect</h2>
+        <div class="image-placeholder">
+            <img src="/placeholder.svg?height=300&width=600" alt="Image of a neural network with equations written alongside each layer and node, highlighting the mathematical representation of the network's architecture.">
+        </div>
+        <p>Congratulations, you've gone from architect to engineer! You've designed a neural network and written the mathematical equations that describe its behavior. Let's recap:</p>
+        <div class="continue-button" onclick="showNextSection(14)">Continue</div>
+    </section>
+
+    <section id="section14">
+        <ul>
+            <li>You designed a feedforward neural network with three hidden layers, specifying the number of nodes and connections.</li>
+            <li>You learned how to represent the calculations within each neuron mathematically using weighted sums, biases, and activation functions.</li>
+            <li>You saw how the output of one layer becomes the input for the next, creating a chain of computations.</li>
+        </ul>
+        <div class="continue-button" onclick="showNextSection(15)">Continue</div>
+    </section>
+
+    <section id="section15">
+        <p>You've taken a major step towards mastering neural network architectures. In the next lesson, we'll explore specific types of layers and activation functions that give deep learning models their remarkable power and flexibility. Get ready to dive deeper into the world of neural network components!</p>
+    </section>
+
+    <script>
+        // Show the first section initially
+        document.getElementById("section1").style.display = "block";
+        document.getElementById("section1").style.opacity = "1";
+
+        function showNextSection(nextSectionId) {
+            const currentButton = event.target;
+            const nextSection = document.getElementById("section" + nextSectionId);
+            
+            currentButton.style.display = "none";
+            
+            nextSection.style.display = "block";
+            setTimeout(() => {
+                nextSection.style.opacity = "1";
+            }, 10);
+
+            setTimeout(() => {
+                nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 500);
+        }
+
+        function revealAnswer(id) {
+            const revealText = document.getElementById(id);
+            const revealButton = event.target;
+            
+            revealText.style.display = "block";
+            revealButton.style.display = "none";
+        }
+
+        // Simple network drawing functionality
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            draw(e);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = '#000';
+
+            ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.beginPath();
+        }
+
+        function checkNetwork() {
+            // This is a placeholder for network checking logic
+            // In a real implementation, you would analyze the drawn network
+            const feedback = document.getElementById('networkFeedback');
+            feedback.textContent = "Great job! Your network looks good. Remember to label your weights and biases.";
+        }
+    </script>
+</body>
+</html>
